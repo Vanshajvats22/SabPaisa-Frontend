@@ -1,0 +1,89 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100vw - 250px);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    background-color: white;
+    /* margin-bottom: 20px; */
+}
+
+.search-bar {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+    position: relative;
+    left: 20px;
+}
+
+
+.srchbtn span{
+    font-size: large;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 2rem;
+}
+
+.user-name {
+    margin-right: 10px;
+}
+
+
+
+/* For Tablets (Portrait) and Small Desktops */
+@media (max-width: 1024px) {
+    .header {
+        left: 200px; /* Adjust sidebar width if different */
+        width: calc(100vw - 200px); /* Adjust width according to sidebar width */
+    }
+
+    .search-bar {
+        width: 250px; /* Adjust search bar width */
+    }
+}
+
+/* For Tablets (Landscape) and Small Desktops */
+@media (max-width: 768px) {
+    .header {
+        left: 150px; /* Adjust sidebar width if different */
+        width: calc(100vw - 150px); /* Adjust width according to sidebar width */
+    }
+
+    .search-bar {
+        width: 200px; /* Adjust search bar width */
+    }
+
+    .user-info {
+        position: absolute;
+        right: 20px;
+    }
+}
+
+/* For Mobile Devices */
+@media (max-width: 576px) {
+    .header {
+        left: 0; /* Full width header on mobile */
+        width: 100%;
+        padding: 0 10px; /* Adjust padding */
+    }
+
+    .search-bar {
+        width: 150px; /* Adjust search bar width */
+        padding: 5px; /* Adjust padding */
+    }
+
+    .user-info {
+        display: none; /* Hide user info on small screens to save space */
+    }
+
+    /* Optional: You can add a toggle button or menu icon for mobile */
+}

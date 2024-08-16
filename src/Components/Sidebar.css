@@ -1,0 +1,119 @@
+
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.sidebar .logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar .logo img {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.sidebar .menu {
+    width: 100%;
+    height: 100%;
+   
+}
+
+.sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    text-align: left;
+    
+}
+
+.sidebar .menu-item span{
+    padding: 15px 20px; 
+} 
+.sidebar .menu-item:hover span{
+    margin-left: 1rem;
+    transition: .4s ease;
+}
+
+.sidebar .menu-item:hover{
+    background-color: #93acea;
+}
+.sidebar .menu-item.active{
+    /* border-left: 4px solid#93acea ; */
+    background-color: #f7f7f7;
+    
+}
+
+
+/* media query*/
+
+
+/* For Tablets (Portrait) */
+@media (max-width: 768px) {
+    .sidebar {
+      width: 200px; /* Slightly narrower sidebar for tablets */
+    }
+  }
+  
+  /* For Tablets (Landscape) and Small Desktops */
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 220px; /* Adjust width for tablets in landscape and small desktops */
+    }
+  }
+  
+  /* For Mobile Devices */
+  @media (max-width: 576px) {
+    .sidebar {
+      width: 100%;
+      height: auto; /* Allow the sidebar to adjust its height based on content */
+      position: relative; /* Change to relative positioning on mobile */
+      transform: translateX(-100%); /* Hide sidebar off-screen by default */
+      transition: transform 0.3s ease;
+    }
+    
+    .sidebar.show {
+      transform: translateX(0); /* Show sidebar on mobile */
+    }
+  
+    .menu-item {
+      padding: 15px; /* Larger touch area on mobile */
+    }
+  }
+  
+  /* Toggle Button for Mobile */
+  .sidebar-toggle {
+    display: none;
+  }
+  
+  /* Show toggle button on mobile */
+  @media (max-width: 576px) {
+    .sidebar-toggle {
+      display: block;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #2c3e50;
+      color: #ecf0f1;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  }
+  

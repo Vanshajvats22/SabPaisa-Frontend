@@ -1,0 +1,278 @@
+/* Basic Reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+.container {
+    height: calc(100vh - 80px);
+    width:calc(100vw - 250px);
+    background-color: #f7f7f7;
+    margin-top: 80px;
+}
+
+.container .dropdown-container{
+    height: 30px;
+    width: 80px;
+    margin-left: 25px;
+    margin-top: 15px;
+      
+}
+.dropdown-container select{
+    height: 28px;
+    width: 134px;
+    font-size: 10px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold; 
+    cursor: pointer;
+}
+/* .dropValues option:hover {
+    cursor: pointer;
+    background-color: aqua;
+    color: white;
+} */
+
+
+
+.dashboard{
+    
+    padding: 25px;
+    height:calc(100% - 30px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #f7f7f7;
+}
+
+.container:hover{
+    scroll-behavior: smooth;
+}
+.stats {
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 20px;
+    height: 148px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    width: 23%;
+    /* text-align: center; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.stat-item .down{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stat-item .up{
+    display: flex;
+    justify-content: space-between;
+}
+#total-reports .stat-changeup{
+    color: blue;
+    
+}
+#sucess-reports .stat-changeup{
+    color: rgba(8, 195, 27, 0.836);
+    
+}
+#failure-reports .stat-changeup{
+    color: rgba(248, 27, 7, 0.836);
+    
+}
+#pending-reports .stat-changeup{
+    color: rgba(248, 132, 7, 0.836);
+    
+}
+
+.stat-item i span{
+    width: 48px;
+}
+.stat-title {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-change {
+    display: block;
+    font-size: 14px;
+}
+
+.stat-change.up {
+    color: green;
+}
+
+.stat-change.down {
+    color: red;
+}
+
+.report-details,
+.deals-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px;
+    background-color: #f7f7f7;
+}
+
+tbody td {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+/* Responsive Media Queries */
+
+/* For Tablets and Small Desktops */
+@media (max-width: 1024px) {
+    .container {
+        width: calc(100vw - 200px); /* Adjust based on sidebar or other fixed widths */
+    }
+
+    .dropdown-container {
+        margin-left: 15px;
+        margin-top: 10px;
+    }
+
+    .dropdown-container select {
+        width: 120px; /* Adjust dropdown width for tablets */
+        font-size: 12px; /* Increase font size for readability */
+    }
+
+    .dashboard {
+        padding: 20px;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item {
+        width: 100%; /* Full width for each stat-item */
+        margin-bottom: 10px;
+    }
+}
+
+/* For Tablets (Landscape) and Medium Screens */
+@media (max-width: 768px) {
+    .container {
+        width: calc(100vw - 150px); /* Adjust based on sidebar or other fixed widths */
+    }
+
+    .dropdown-container {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .dropdown-container select {
+        width: 100px; /* Adjust dropdown width for tablets in landscape */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    .dashboard {
+        padding: 15px;
+    }
+
+    .stats {
+        flex-direction: column;
+    }
+
+    .stat-item {
+        width: 100%; /* Full width for each stat-item */
+        margin-bottom: 10px;
+    }
+
+    .report-details,
+    .deals-details {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 14px; /* Adjust font size for table */
+    }
+
+    thead th,
+    tbody td {
+        padding: 8px; /* Adjust padding for table */
+    }
+}
+
+/* For Mobile Devices */
+@media (max-width: 576px) {
+    .container {
+        width: 100%;
+    }
+
+    .dropdown-container {
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+
+    .dropdown-container select {
+        width: 100px; /* Adjust dropdown width for mobile */
+        font-size: 14px; /* Increase font size for readability */
+    }
+
+    .dashboard {
+        padding: 10px;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item {
+        width: 100%; /* Full width for each stat-item */
+        margin-bottom: 10px;
+    }
+
+    .report-details,
+    .deals-details {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 12px; /* Adjust font size for mobile */
+    }
+
+    thead th,
+    tbody td {
+        padding: 6px; /* Adjust padding for table */
+    }
+}
