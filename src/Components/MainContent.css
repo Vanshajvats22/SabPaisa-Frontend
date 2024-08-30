@@ -3,22 +3,23 @@
 
 
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-}
+} */
 
 
-.container {
-    height: calc(100vh - 80px);
-    width:calc(100vw - 250px);
+.MainContent{
+    height: calc(100vh - 82px);
+    width: calc(100vw - 250px);
     background-color: #f7f7f7;
     margin-top: 80px;
+    
 }
 
-.container .dropdown-container{
+/* .container .dropdown-container{
     height: 30px;
     width: 80px;
     margin-left: 25px;
@@ -34,7 +35,7 @@
     text-align: center;
     font-weight: bold; 
     cursor: pointer;
-}
+} */
 /* .dropValues option:hover {
     cursor: pointer;
     background-color: aqua;
@@ -44,9 +45,9 @@
 
 
 .dashboard{
-    
+    width: 100%;
     padding: 25px;
-    height:calc(100% - 30px);
+    height:100%;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #f7f7f7;
@@ -157,83 +158,73 @@ tbody td {
 
 /* Responsive Media Queries */
 
-/* For Tablets and Small Desktops */
-@media (max-width: 1024px) {
-    .container {
-        width: calc(100vw - 200px); /* Adjust based on sidebar or other fixed widths */
-    }
-
-    .dropdown-container {
-        margin-left: 15px;
-        margin-top: 10px;
-    }
-
-    .dropdown-container select {
-        width: 120px; /* Adjust dropdown width for tablets */
-        font-size: 12px; /* Increase font size for readability */
-    }
-
-    .dashboard {
-        padding: 20px;
-    }
-
-    .stats {
-        flex-direction: column;
-        align-items: center;
-    }
-
+/* Tablets (portrait and landscape) */
+/* @media (min-width: 600px) and (max-width: 899px) {
     .stat-item {
-        width: 100%; /* Full width for each stat-item */
-        margin-bottom: 10px;
+      flex: 1 1 calc(50% - 20px);
     }
-}
-
-/* For Tablets (Landscape) and Medium Screens */
-@media (max-width: 768px) {
-    .container {
-        width: calc(100vw - 150px); /* Adjust based on sidebar or other fixed widths */
-    }
-
-    .dropdown-container {
-        margin-left: 10px;
-        margin-top: 10px;
-    }
-
-    .dropdown-container select {
-        width: 100px; /* Adjust dropdown width for tablets in landscape */
-        font-size: 14px; /* Adjust font size */
-    }
-
+  
     .dashboard {
-        padding: 15px;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
-
-    .stats {
-        flex-direction: column;
+  
+    .report-details {
+      margin-top: 30px;
     }
-
-    .stat-item {
-        width: 100%; /* Full width for each stat-item */
-        margin-bottom: 10px;
-    }
-
-    .report-details,
+  
     .deals-details {
-        padding: 15px;
+      margin-top: 30px;
     }
-
-    table {
-        font-size: 14px; /* Adjust font size for table */
+  } */
+  
+  /* Laptops and larger tablets (landscape) */
+  /* @media (min-width: 900px) and (max-width: 1199px) {
+    .stat-item {
+      flex: 1 1 calc(25% - 20px);
     }
-
-    thead th,
-    tbody td {
-        padding: 8px; /* Adjust padding for table */
+  
+    .dashboard {
+      flex-direction: row;
+      flex-wrap: wrap;
     }
-}
+  
+    .report-details {
+      margin-top: 40px;
+    }
+  
+    .deals-details {
+      margin-top: 40px;
+    }
+  } */
+  
+  /* Desktops and larger screens */
+  /* @media (min-width: 1200px) {
+    .stat-item {
+      flex: 1 1 calc(20% - 20px);
+    }
+  
+    .dashboard {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  
+    .report-details {
+      margin-top: 50px;
+    }
+  
+    .deals-details {
+      margin-top: 50px;
+    }
+  } */
 
-/* For Mobile Devices */
-@media (max-width: 576px) {
+
+
+
+
+
+
+/* @media (max-width: 576px) {
     .container {
         width: 100%;
     }
@@ -244,8 +235,8 @@ tbody td {
     }
 
     .dropdown-container select {
-        width: 100px; /* Adjust dropdown width for mobile */
-        font-size: 14px; /* Increase font size for readability */
+        width: 100px; 
+        font-size: 14px; 
     }
 
     .dashboard {
@@ -258,7 +249,7 @@ tbody td {
     }
 
     .stat-item {
-        width: 100%; /* Full width for each stat-item */
+        width: 100%; 
         margin-bottom: 10px;
     }
 
@@ -268,11 +259,49 @@ tbody td {
     }
 
     table {
-        font-size: 12px; /* Adjust font size for mobile */
+        font-size: 12px; 
     }
 
     thead th,
     tbody td {
-        padding: 6px; /* Adjust padding for table */
+        padding: 6px; 
     }
+} */
+
+@media screen and (max-width: 1200px){
+    
+     
+
+
+    .dashboard{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .dashboard .stats{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 20px;
+        
+    }
+    .stat-item{
+        width: 100%;
+     
+    }
+    .report-details{
+        height: auto;
+        width: 100%;
+    }
+    .deals-details{
+        height: auto;
+        width: 100%;
+    }
+    .deals-details table {
+        height: auto;
+        width: 100%;
+    }
+   
+
 }

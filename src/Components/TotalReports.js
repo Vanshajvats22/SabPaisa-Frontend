@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios for making API calls
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import './Total-reports.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Pagination } from 'react-bootstrap'; // Import Bootstrap Pagination
 
 // Define the validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -16,23 +18,35 @@ const validationSchema = Yup.object().shape({
 export default function TotalReports() {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [recordsPerPage] = useState(50); // Number of records per page
 
- const initialValues={
+  const initialValues = {
     name: '',
     fromDate: '',
     toDate: '',
     transactionType: '',
     status: '',
-  }
+  };
+
+  useEffect(() => {
+    // Fetch data initially with the first page
+    fetchTransactions(initialValues, 1);
+  }, []);
 
   // Function to fetch data from the backend
-  const fetchTransactions = async (values) => {
+  const fetchTransactions = async (values, page) => {
     try {
       // Replace with your API endpoint
-      const response = await axios.get('/api/transactions', { params: values });
-      setTransactions(response.data);
-      setCurrentPage(1); // Reset to the first page when new data is fetched
+      const response = await axios.get('/api/transactions', { 
+        params: {
+          ...values,
+          page: page,
+          limit: recordsPerPage,
+        }
+      });
+      setTransactions(response.data.transactions); // Assuming your API returns transactions under `data.transactions`
+      setTotalPages(response.data.totalPages); // Assuming your API returns totalPages
     } catch (error) {
       console.error('Error fetching transactions:', error);
     }
@@ -40,8 +54,14 @@ export default function TotalReports() {
 
   // Handle form submission
   const handleSearch = (values) => {
-    console.log("values",values)
-    fetchTransactions(values);
+    fetchTransactions(values, 1); // Reset to the first page on new search
+    setCurrentPage(1);
+  };
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchTransactions(initialValues, pageNumber); // Fetch new page data
   };
 
   // Function to handle table filtering
@@ -61,17 +81,6 @@ export default function TotalReports() {
     });
   };
 
-  // Pagination Logic
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = transactions.slice(indexOfFirstRecord, indexOfLastRecord);
-
-  const totalPages = Math.ceil(transactions.length / recordsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   // Example functions for exporting and printing (implement as needed)
   const copyTable = () => { /* Copy table data logic */ };
   const exportToExcel = () => { /* Export to Excel logic */ };
@@ -79,10 +88,16 @@ export default function TotalReports() {
   const printTable = () => { /* Print table logic */ };
 
   return (
-    <div className="container">
-      <div className='titleHeading'>Total - Reports</div>
+    <div className="MainContent">
+
+      
+
+      
 
       <section className="dashboard" id="sections">
+      
+      <div className='titleHeading'>Total - Reports</div>
+         
         <div className="states">
           <div className="transaction-filters">
             <h2>Transaction Search Filters</h2>
@@ -160,23 +175,23 @@ export default function TotalReports() {
             <h2>Client Transactions</h2>
 
             <div className='clintbuttonInput'>
-            <div className="clint_buttons">
-              <button onClick={copyTable}>Copy</button>
-              <button onClick={exportToExcel}>Excel</button>
-              <button onClick={exportToPDF}>PDF</button>
-              <button onClick={printTable}>Print</button>
-            </div>
-            <div className='clintInput'>
-            <input
-              type="text"
-              id="filter"
-              onKeyUp={filterTable}
-              placeholder="Filter Results"
-            />
-            </div>
+              <div className="clint_buttons">
+                <button onClick={copyTable}>Copy</button>
+                <button onClick={exportToExcel}>Excel</button>
+                <button onClick={exportToPDF}>PDF</button>
+                <button onClick={printTable}>Print</button>
+              </div>
+              <div className='clintInput'>
+                <input
+                  type="text"
+                  id="filter"
+                  onKeyUp={filterTable}
+                  placeholder="Filter Results"
+                />
+              </div>
             </div>
 
-            <table id="transactionTable">
+            <table id="transactionTable" className="table">
               <thead>
                 <tr>
                   <th>Sr. No.</th>
@@ -190,10 +205,10 @@ export default function TotalReports() {
                 </tr>
               </thead>
               <tbody>
-                {currentRecords.length ? (
-                  currentRecords.map((transaction, index) => (
+                {transactions.length ? (
+                  transactions.map((transaction, index) => (
                     <tr key={index}>
-                      <td>{indexOfFirstRecord + index + 1}</td>
+                      <td>{(currentPage - 1) * recordsPerPage + index + 1}</td>
                       <td>{transaction.applicationId}</td>
                       <td>{transaction.paidAmount}</td>
                       <td>{transaction.txnId}</td>
@@ -210,32 +225,29 @@ export default function TotalReports() {
                 )}
               </tbody>
             </table>
-            <div className="pagination">
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              {[...Array(totalPages).keys()].map(page => (
-                <button
-                  key={page + 1}
-                  onClick={() => handlePageChange(page + 1)}
-                  className={page + 1 === currentPage ? 'active' : ''}
+
+            {/* Pagination */}
+            <Pagination>
+              <Pagination.Prev
+                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => handlePageChange(index + 1)}
                 >
-                  {page + 1}
-                </button>
+                  {index + 1}
+                </Pagination.Item>
               ))}
-              <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
-            </div>
+              <Pagination.Next
+                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+              />
+            </Pagination>
           </div>
-        </div>
+
+          </div>
       </section>
     </div>
   );
-}
+};

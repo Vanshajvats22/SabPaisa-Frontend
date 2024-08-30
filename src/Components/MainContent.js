@@ -45,19 +45,9 @@ const MainContent = () => {
 
 
   return (
-    <div className="container">
+    <div className="MainContent">
        
-       {/* <div className="dropdown-container">
-      
-       <select className='dropValues' >
-        <option value="">Today</option>
-        <option value="option1">Yesterday</option>
-        <option value="option2">Day Before Yesterday</option>
-        
-       </select>
-      
-       </div> */}
-       
+     
       
         <section className="dashboard" id="sections">
 
@@ -80,7 +70,7 @@ const MainContent = () => {
 
               </div>
               <div className='down'>
-                <span className="stat-changeup">8.5% Up from yesterday</span>
+                <span className="stat-changeup">Last 24 Hours</span>
               </div>
             </div>
 
@@ -101,7 +91,7 @@ const MainContent = () => {
 
               </div>
               <div className='down'>
-                <span className="stat-changeup">1.3% Up from past week</span>
+                <span className="stat-changeup">Last 24 Hours</span>
               </div>
             </div>
 
@@ -123,7 +113,7 @@ const MainContent = () => {
 
               </div>
               <div className='down'>
-                <span className="stat-changeup">4.3% Down from yesterday</span>
+                <span className="stat-changeup">Last 24 Hours</span>
               </div>
             </div>
 
@@ -144,7 +134,7 @@ const MainContent = () => {
 
               </div>
               <div className='down'>
-                <span className="stat-changeup">1.8% Up from yesterday</span>
+                <span className="stat-changeup">Last 24 Hours</span>
               </div>
             </div>
 

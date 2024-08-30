@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Import axios for making API calls
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import './Sucess.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Pagination } from 'react-bootstrap'; // Import Bootstrap Pagination
 
 // Define the validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -13,15 +15,38 @@ const validationSchema = Yup.object().shape({
   status: Yup.string().required('Status is required'),
 });
 
-export default function PendingReports() {
+export default function TotalReports() {
   const [transactions, setTransactions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [recordsPerPage] = useState(50); // Number of records per page
+
+  const initialValues = {
+    name: '',
+    fromDate: '',
+    toDate: '',
+    transactionType: '',
+    status: '',
+  };
+
+  useEffect(() => {
+    // Fetch data initially with the first page
+    fetchTransactions(initialValues, 1);
+  }, []);
 
   // Function to fetch data from the backend
-  const fetchTransactions = async (values) => {
+  const fetchTransactions = async (values, page) => {
     try {
       // Replace with your API endpoint
-      const response = await axios.get('/api/transactions', { params: values });
-      setTransactions(response.data);
+      const response = await axios.get('/api/transactions', { 
+        params: {
+          ...values,
+          page: page,
+          limit: recordsPerPage,
+        }
+      });
+      setTransactions(response.data.transactions); // Assuming your API returns transactions under `data.transactions`
+      setTotalPages(response.data.totalPages); // Assuming your API returns totalPages
     } catch (error) {
       console.error('Error fetching transactions:', error);
     }
@@ -29,7 +54,14 @@ export default function PendingReports() {
 
   // Handle form submission
   const handleSearch = (values) => {
-    fetchTransactions(values);
+    fetchTransactions(values, 1); // Reset to the first page on new search
+    setCurrentPage(1);
+  };
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchTransactions(initialValues, pageNumber); // Fetch new page data
   };
 
   // Function to handle table filtering
@@ -56,22 +88,18 @@ export default function PendingReports() {
   const printTable = () => { /* Print table logic */ };
 
   return (
-    <div className="container">
-
-<div className='titleHeading'>Pending - Reports</div>
+    <div className="MainContent">
+      
 
       <section className="dashboard" id="sections">
+
+      <div className='titleHeading'>Pending - Reports</div>
+
         <div className="states">
           <div className="transaction-filters">
             <h2>Transaction Search Filters</h2>
             <Formik
-              initialValues={{
-                name: '',
-                fromDate: '',
-                toDate: '',
-                transactionType: '',
-                status: '',
-              }}
+              initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={handleSearch}
             >
@@ -121,7 +149,18 @@ export default function PendingReports() {
                       <div className="error">{errors.transactionType}</div>
                     ) : null}
                   </div>
-                  
+                  {/* <div className="form-group">
+                    <label htmlFor="status">Status</label>
+                    <Field as="select" id="status" name="status">
+                      <option value="">Select An Option</option>
+                      <option value="success">Success Reports</option>
+                      <option value="failure">Failure Reports</option>
+                      <option value="pending">Pending Reports</option>
+                    </Field>
+                    {errors.status && touched.status ? (
+                      <div className="error">{errors.status}</div>
+                    ) : null}
+                  </div> */}
                   <button type="submit" id="search-btn">
                     Search
                   </button>
@@ -131,23 +170,25 @@ export default function PendingReports() {
           </div>
           <div className="client-transactions">
             <h2>Client Transactions</h2>
+
             <div className='clintbuttonInput'>
-            <div className="clint_buttons">
-              <button onClick={copyTable}>Copy</button>
-              <button onClick={exportToExcel}>Excel</button>
-              <button onClick={exportToPDF}>PDF</button>
-              <button onClick={printTable}>Print</button>
+              <div className="clint_buttons">
+                <button onClick={copyTable}>Copy</button>
+                <button onClick={exportToExcel}>Excel</button>
+                <button onClick={exportToPDF}>PDF</button>
+                <button onClick={printTable}>Print</button>
+              </div>
+              <div className='clintInput'>
+                <input
+                  type="text"
+                  id="filter"
+                  onKeyUp={filterTable}
+                  placeholder="Filter Results"
+                />
+              </div>
             </div>
-            <div className='clintInput'>
-            <input
-              type="text"
-              id="filter"
-              onKeyUp={filterTable}
-              placeholder="Filter Results"
-            />
-            </div>
-            </div>
-            <table id="transactionTable">
+
+            <table id="transactionTable" className="table">
               <thead>
                 <tr>
                   <th>Sr. No.</th>
@@ -164,7 +205,7 @@ export default function PendingReports() {
                 {transactions.length ? (
                   transactions.map((transaction, index) => (
                     <tr key={index}>
-                      <td>{index + 1}</td>
+                      <td>{(currentPage - 1) * recordsPerPage + index + 1}</td>
                       <td>{transaction.applicationId}</td>
                       <td>{transaction.paidAmount}</td>
                       <td>{transaction.txnId}</td>
@@ -181,8 +222,28 @@ export default function PendingReports() {
                 )}
               </tbody>
             </table>
+
+            {/* Pagination */}
+            <Pagination>
+              <Pagination.Prev
+                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+              />
+            </Pagination>
           </div>
-        </div>
+
+          </div>
       </section>
     </div>
   );

@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 82px;
     background-color: white;
     /* margin-bottom: 20px; */
 }
@@ -40,50 +40,50 @@
 
 
 /* For Tablets (Portrait) and Small Desktops */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
     .header {
-        left: 200px; /* Adjust sidebar width if different */
-        width: calc(100vw - 200px); /* Adjust width according to sidebar width */
+        left: 200px;
+        width: calc(100vw - 200px); 
     }
 
     .search-bar {
-        width: 250px; /* Adjust search bar width */
+        width: 250px; 
     }
-}
+} */
 
-/* For Tablets (Landscape) and Small Desktops */
-@media (max-width: 768px) {
+
+/* @media (max-width: 768px) {
     .header {
-        left: 150px; /* Adjust sidebar width if different */
-        width: calc(100vw - 150px); /* Adjust width according to sidebar width */
+        left: 150px;
+        width: calc(100vw - 150px); 
     }
 
     .search-bar {
-        width: 200px; /* Adjust search bar width */
+        width: 200px; 
     }
 
     .user-info {
         position: absolute;
         right: 20px;
     }
-}
+} */
 
 /* For Mobile Devices */
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
     .header {
-        left: 0; /* Full width header on mobile */
+        left: 0; 
         width: 100%;
-        padding: 0 10px; /* Adjust padding */
+        padding: 0 10px; 
     }
 
     .search-bar {
-        width: 150px; /* Adjust search bar width */
-        padding: 5px; /* Adjust padding */
+        width: 150px;
+        padding: 5px; 
     }
 
     .user-info {
-        display: none; /* Hide user info on small screens to save space */
+        display: none; 
     }
 
-    /* Optional: You can add a toggle button or menu icon for mobile */
-}
+    
+} */
