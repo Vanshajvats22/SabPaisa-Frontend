@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { ReportChart } from './ReportDetails'; // Named export
 // import DealsDetails from './DealsDetails';
-import Icon1 from '../Assets/Group 3.png'
-import Icon2 from '../Assets/Icon (1).png'
-import Icon3 from '../Assets/Icon.png'
-import Icon4 from '../Assets/Icon (2).png'
+import Icon1 from '../Assets/Group 3 (1).svg'
+import Icon2 from '../Assets/Icon (1).svg'
+import Icon3 from '../Assets/Icon.svg'
+import Icon4 from '../Assets/Icon (2).svg'
 import './MainContent.css'
 
 
@@ -13,24 +13,24 @@ const MainContent = () => {
 
   // for fetching the data from api
   const [reportData, setReportData] = useState({
-    totalReports: 100,
-    successReports: 70,
-    failureReports: 20,
-    pendingReports: 10
+    totalReports: 126,
+    successReports: 85,
+    failureReports: 26,
+    pendingReports: 15
   });
 
-  useEffect(() => {
-    const fetchReportData = async () => {
-      try {
-        const response = await axios.get('https://your-backend-api.com/reports/today');
-        setReportData(response.data);
-      } catch (error) {
-        console.error('Error fetching report data:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchReportData = async () => {
+  //     try {
+  //       const response = await axios.get('');
+  //       setReportData(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching report data:', error);
+  //     }
+  //   };
 
-    fetchReportData();
-  }, []);
+  //   fetchReportData();
+  // }, []);
 
 
 

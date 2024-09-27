@@ -33,11 +33,13 @@
     right: 2rem;
 }
 
-.user-name {
+.user-image {
     margin-right: 10px;
 }
 
-
+.bell-icon{
+    margin-right: 10px;
+}
 
 /* For Tablets (Portrait) and Small Desktops */
 /* @media (max-width: 1024px) {
@@ -52,21 +54,26 @@
 } */
 
 
-/* @media (max-width: 768px) {
-    .header {
-        left: 150px;
-        width: calc(100vw - 150px); 
-    }
+@media (max-width: 870px) {
+    /* .header {
+        left: 200px;
+        width: calc(100vw - 200px); 
+    } */
 
     .search-bar {
         width: 200px; 
     }
 
     .user-info {
+        width: 142px;
         position: absolute;
         right: 20px;
+        font-size: 14px;
     }
-} */
+    .user-role{
+        width: 40px;
+    }
+}
 
 /* For Mobile Devices */
 /* @media (max-width: 576px) {

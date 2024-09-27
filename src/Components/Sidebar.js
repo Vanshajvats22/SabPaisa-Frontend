@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from "../Assets/Outlook-Company lo.png";
+import logo from "../Assets/Group 46312.svg";
 import { useNavigate } from 'react-router-dom'; 
 import './Sidebar.css'
 

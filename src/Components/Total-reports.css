@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .transaction-filters, .client-transactions {
@@ -78,7 +78,13 @@ label {
     font-size: 14px;
     
 }
-
+.form-group input[type="text"],.form-group  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    
+}
 
 
 .clint_buttons button {
@@ -153,16 +159,32 @@ label {
     margin-bottom: 20px;
     box-sizing: border-box;
 }
-
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+   
+  }
+  
+  .table {
+    width: 100%;
+    min-width: 800px; 
+    table-layout: auto;
+    border-collapse: collapse;
+    
+    overflow-x: auto;
+  }
+  
 .client-transactions table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto;
 }
 
 #transactionTable th, td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+    
 }
 
  #transactionTable thead {

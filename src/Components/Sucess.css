@@ -53,6 +53,13 @@ label {
     border-radius: 3px;
     font-size: 14px;
 }
+.form-group input[type="date"],.form-group  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    
+}
 
 .clint_buttons button {
     align-self: center;
@@ -117,6 +124,7 @@ label {
 .client-transactions table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto;
 }
 
 #transactionTable th, td {
